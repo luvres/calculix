@@ -28,17 +28,12 @@ wget -c --tries=1000000 http://www.dhondt.de/ccx_2.12.pdf
 wget -c --tries=1000000 http://www.dhondt.de/ccx_2.12.src.tar.bz2
 echo 'Packages OK'
 
+
 # Spooles as solver for CCX
 echo 'Building Spooles'
-#wget -c --tries=1000000 http://www.netlib.org/linalg/spooles/spooles.2.2.tgz
-mkdir SPOOLES.2.2
-cp spooles.2.2.tgz SPOOLES.2.2
 cd SPOOLES.2.2
-tar xzf spooles.2.2.tgz
-patch ./Tree/src/makeGlobalLib ../SPOOLES_makeGlobalLib.patch # Fix drawTree
-patch Make.inc ../SPOOLES_Make.inc.patch # Fix c compiler location
-
 make lib > ../spooles_make.txt 2> ../spooles_error.txt
+
 cp spooles.a $PROGSDIR/lib
 mkdir $PROGSDIR/include/spooles
 find . -name '*.h' | cpio -updm $PROGSDIR/include/spooles
@@ -49,47 +44,30 @@ cd ..
 #mkdir $PROGSDIR/include/spooles/MT
 cp spoolesMT.h $PROGSDIR/include/spooles/MT
 cd ../..
-rm SPOOLES.2.2 -Rf
-rm spooles.2.2.tgz
+
 
 # Install ARPACK to support CalculiX
 echo 'Building ARPACK'
-#wget -c --tries=1000000 http://www.caam.rice.edu/software/ARPACK/SRC/arpack96.tar.gz
-#wget -c --tries=1000000 http://www.caam.rice.edu/software/ARPACK/SRC/patch.tar.gz
-tar xzf arpack96.tar.gz
-tar xzf patch.tar.gz
 cd ARPACK
-patch ARmake.inc ../ARPACK_ARmake.inc.patch
-patch UTIL/second.f ../ARPACK_second.f.patch
 make lib > ../ARPACK_make.txt 2> ../ARPACK_error.txt
 cp libarpack_linux.a $PROGSDIR/lib
 cd ..
-rm ARPACK -rf
-rm arpack96.tar.gz
-rm patch.tar.gz
+
 
 # CGX from CalculiX
 echo 'Installing CGX'
-#wget -c --tries=1000000 http://www.dhondt.de/cgx_2.12.all.tar.bz2
-#wget -c --tries=1000000 http://www.dhondt.de/cgx_2.12.pdf
-tar xjf cgx_2.12.all.tar.bz2
 cd CalculiX/cgx_2.12/src
 make > ../../../cgx_make.txt 2> ../../../cgx_error.txt
 cp cgx $PROGSDIR/bin
 cd ../../..
 cp cgx_2.12.pdf $PROGSDIR/doc/
 rm CalculiX -Rf
-rm cgx_2.12.all.tar.bz2
 rm cgx_2.12.pdf
+
 
 # CCX 2.12 with pardiso and spooles
 echo 'Installing CCX 2.12'
-#wget -c --tries=1000000 http://www.dhondt.de/ccx_2.12.pdf
-#wget -c --tries=1000000 http://www.dhondt.de/ccx_2.12.src.tar.bz2
-tar xjf ccx_2.12.src.tar.bz2
-cd CalculiX/ccx_2.12
-cd src
-cp ../../../ccx_Makefile Makefile
+cd CalculiX/ccx_2.12/src
 make > ../../../ccx_make.txt 2> ../../../ccx_error.txt
 cp ccx_2.12 $PROGSDIR/bin
 cp LOGBOOK $PROGSDIR/doc
@@ -97,4 +75,4 @@ cd ../../..
 cp ccx_2.12.pdf $PROGSDIR/doc
 rm CalculiX -Rf
 rm ccx_2.12.pdf
-rm ccx_2.12.src.tar.bz2
+

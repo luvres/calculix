@@ -7,9 +7,9 @@ sudo apt install gfortran xorg-dev #libxmu-headers
 ```
 ##### The script can be run anywhere after downloading:
 ```
-git clone https://github.com/luvres/graphics.git
+git clone https://github.com/luvres/calculix.git
 
-pushd graphics/calculix-2.12/
+pushd calculix/
 ```
 ##### And will install in ~/CalculiX. The installation is started with
 ```

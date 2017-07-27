@@ -1,0 +1,45 @@
+sys rm -rf *bouf *mfl *dfl *sur *nam
+read ../rae2822.fbd
+del me
+#div bl 6
+#bia bl 1
+div bl div 4
+bia bl div 200
+#div all mult 2
+seta tedge p P001
+swep all s2 tra 0 0 0.1 1 append
+setr s1 b all
+setr s1 se s2
+comp s1 do
+comp in do
+comp out do
+comp profil do
+setr profil se tedge
+elty all
+elty all he8f
+mesh all
+send s1 abq mflow 0.
+send s2 abq mflow 0.
+comp profil do
+comp profil do
+send profil abq nam
+send in abq nam
+send in abq spcf 1 248.
+send in abq spcf 23 0.
+send in abq spcf t 288.
+send out abq nam
+send out abq spcf p 1.e5
+send profil abq sur
+send profil abq spcf 12 0.
+send profil abq mflow 0.
+send profil abq dflux 0.
+send wall abq spcf 2 0.
+send wall abq mflow 0.
+send all abq dflux 0.
+send all abq
+plot f all
+view ed off
+view elem on
+rot z
+#quit
+
