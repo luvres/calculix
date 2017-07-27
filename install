@@ -19,11 +19,11 @@ mkdir -p $PROGSDIR/doc
 mkdir -p $PROGSDIR/include
 
 
-# Spooles as solver for CCX
+### Spooles as solver for CCX
+#-----------------------------
 echo 'Building Spooles'
 cd SPOOLES.2.2
 make lib > ../spooles_make.txt 2> ../spooles_error.txt
-
 cp spooles.a $PROGSDIR/lib
 mkdir $PROGSDIR/include/spooles
 find . -name '*.h' | cpio -updm $PROGSDIR/include/spooles
@@ -31,12 +31,12 @@ cd MT/src
 make > ../../../spoolesMT_make.txt 2> ../../../spoolesMT_error.txt
 cp spoolesMT.a $PROGSDIR/lib
 cd ..
-#mkdir $PROGSDIR/include/spooles/MT
 cp spoolesMT.h $PROGSDIR/include/spooles/MT
 cd ../..
 
 
-# Install ARPACK to support CalculiX
+### Install ARPACK to support CalculiX
+#--------------------------------------
 echo 'Building ARPACK'
 cd ARPACK
 make lib > ../ARPACK_make.txt 2> ../ARPACK_error.txt
@@ -44,18 +44,19 @@ cp libarpack_linux.a $PROGSDIR/lib
 cd ..
 
 
-# CGX from CalculiX
+### CGX from CalculiX
+#---------------------
 echo 'Installing CGX'
 cd CalculiX/cgx_2.12/src
 make > ../../../cgx_make.txt 2> ../../../cgx_error.txt
 cp cgx $PROGSDIR/bin
 cd ../../..
 cp cgx_2.12.pdf $PROGSDIR/doc/
-#rm CalculiX -Rf
 rm cgx_2.12.pdf
 
 
-# CCX 2.12 with pardiso and spooles
+### CCX 2.12 with pardiso and spooles
+#-------------------------------------
 echo 'Installing CCX 2.12'
 cd CalculiX/ccx_2.12/src
 make > ../../../ccx_make.txt 2> ../../../ccx_error.txt
@@ -63,6 +64,4 @@ cp ccx_2.12 $PROGSDIR/bin
 cp LOGBOOK $PROGSDIR/doc
 cd ../../..
 cp ccx_2.12.pdf $PROGSDIR/doc
-#rm CalculiX -Rf
 rm ccx_2.12.pdf
-
