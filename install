@@ -18,16 +18,6 @@ mkdir -p $PROGSDIR/lib
 mkdir -p $PROGSDIR/doc
 mkdir -p $PROGSDIR/include
 
-echo 'Downloading packages:'
-wget -c --tries=1000000 http://www.netlib.org/linalg/spooles/spooles.2.2.tgz
-wget -c --tries=1000000 http://www.caam.rice.edu/software/ARPACK/SRC/arpack96.tar.gz
-wget -c --tries=1000000 http://www.caam.rice.edu/software/ARPACK/SRC/patch.tar.gz
-wget -c --tries=1000000 http://www.dhondt.de/cgx_2.12.all.tar.bz2
-wget -c --tries=1000000 http://www.dhondt.de/cgx_2.12.pdf
-wget -c --tries=1000000 http://www.dhondt.de/ccx_2.12.pdf
-wget -c --tries=1000000 http://www.dhondt.de/ccx_2.12.src.tar.bz2
-echo 'Packages OK'
-
 
 # Spooles as solver for CCX
 echo 'Building Spooles'
@@ -61,7 +51,7 @@ make > ../../../cgx_make.txt 2> ../../../cgx_error.txt
 cp cgx $PROGSDIR/bin
 cd ../../..
 cp cgx_2.12.pdf $PROGSDIR/doc/
-rm CalculiX -Rf
+#rm CalculiX -Rf
 rm cgx_2.12.pdf
 
 
@@ -73,6 +63,6 @@ cp ccx_2.12 $PROGSDIR/bin
 cp LOGBOOK $PROGSDIR/doc
 cd ../../..
 cp ccx_2.12.pdf $PROGSDIR/doc
-rm CalculiX -Rf
+#rm CalculiX -Rf
 rm ccx_2.12.pdf
 
