@@ -1,4 +1,0 @@
-15c15
-<   CC = /usr/lang-4.0/bin/cc
----
->   CC = /usr/bin/cc

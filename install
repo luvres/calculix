@@ -37,6 +37,7 @@ cd SPOOLES.2.2
 tar xzf spooles.2.2.tgz
 patch ./Tree/src/makeGlobalLib ../SPOOLES_makeGlobalLib.patch # Fix drawTree
 patch Make.inc ../SPOOLES_Make.inc.patch # Fix c compiler location
+
 make lib > ../spooles_make.txt 2> ../spooles_error.txt
 cp spooles.a $PROGSDIR/lib
 mkdir $PROGSDIR/include/spooles
