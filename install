@@ -24,7 +24,7 @@ mkdir -p $PROGSDIR/include
 echo 'Building Spooles'
 cd SPOOLES.2.2
 #make lib > ../spooles_make.txt 2> ../spooles_error.txt
-make
+make lib
 cp spooles.a $PROGSDIR/lib
 mkdir $PROGSDIR/include/spooles
 find . -name '*.h' | cpio -updm $PROGSDIR/include/spooles
@@ -41,7 +41,8 @@ cd ../..
 #--------------------------------------
 echo 'Building ARPACK'
 cd ARPACK
-make lib > ../ARPACK_make.txt 2> ../ARPACK_error.txt
+#make lib > ../ARPACK_make.txt 2> ../ARPACK_error.txt
+make lib
 cp libarpack_linux.a $PROGSDIR/lib
 cd ..
 
