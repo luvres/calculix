@@ -35,7 +35,7 @@ OCCXF = $(SCCXF:.f=.o)
 OCCXC = $(SCCXC:.c=.o)
 OCCXMAIN = $(SCCXMAIN:.c=.o)
 
-ccx_2.13: $(OCCXMAIN) ccx_2.12.a \
+ccx_2.13: $(OCCXMAIN) ccx_2.13.a \
     ./date.pl; $(CC) $(CFLAGS) -c ccx_2.13.c; \
     $(FC) $(FFLAGS) -o $@ $(FPPSTOP) $(OCCXMAIN) ccx_2.13.a \
     -Wl,--start-group \
