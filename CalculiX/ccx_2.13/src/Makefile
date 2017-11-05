@@ -1,10 +1,26 @@
+CFLAGS = -w -O3 -L $(MY_LIB) -I $(MY_INCLUDE) -DARCH="Linux" -DMATRIXSTORAGE -lm -lc -lpthread -ldl
+FFLAGS = -w -O3 -fopenmp -m64 $(OPTIONS)
+LIBS = 
 
-CFLAGS = -Wall -O3 -fopenmp -I ../../../SPOOLES.2.2 -DARCH="Linux" -DSPOOLES -DARPACK -DMATRIXSTORAGE -DNETWORKOUT
-FFLAGS = -Wall -O3 -fopenmp
+# Spooles
+CFLAGS += -I $(MY_INCLUDE)/spooles -DSPOOLES
+LIBS += $(MY_LIB)/spooles.a
 
-CC=cc
+# Multithreaded spooles
+CFLAGS += -DUSE_MT
+LIBS += $(MY_LIB)/spoolesMT.a
+
+# ARPACK
+LIBS += $(MY_LIB)/libarpack_linux.a
+CFLAGS += -DARPACK
+
+CC=gcc
 FC=gfortran
 
+OPTIONS = -w -fno-second-underscore -fcray-pointer -x f77-cpp-input
+FPPSTOP=-x none
+
+.SUFFIXES: .o .c .cu
 .c.o :
 	$(CC) $(CFLAGS) -c $<
 .f.o :
@@ -14,19 +30,17 @@ include Makefile.inc
 
 SCCXMAIN = ccx_2.13.c
 
+# OCCXCU = $(SCCXCU:.cu=.o)
 OCCXF = $(SCCXF:.f=.o)
 OCCXC = $(SCCXC:.c=.o)
 OCCXMAIN = $(SCCXMAIN:.c=.o)
 
-DIR=../../../SPOOLES.2.2
+ccx_2.13: $(OCCXMAIN) ccx_2.12.a \
+    ./date.pl; $(CC) $(CFLAGS) -c ccx_2.13.c; \
+    $(FC) $(FFLAGS) -o $@ $(FPPSTOP) $(OCCXMAIN) ccx_2.13.a \
+    -Wl,--start-group \
+	$(LIBS) \
+    -Wl,--end-group
 
-LIBS = \
-       $(DIR)/spooles.a \
-	../../../ARPACK/libarpack_INTEL.a \
-       -lpthread -lm -lc
-
-ccx_2.13: $(OCCXMAIN) ccx_2.13.a  $(LIBS)
-	./date.pl; $(CC) $(CFLAGS) -c ccx_2.13.c; $(FC) -fopenmp -Wall -O3 -o $@ $(OCCXMAIN) ccx_2.13.a $(LIBS)
-
-ccx_2.13.a: $(OCCXF) $(OCCXC)
+ccx_2.13.a: $(OCCXCU) $(OCCXF) $(OCCXC)
 	ar vr $@ $?
