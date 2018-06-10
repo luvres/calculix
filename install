@@ -50,7 +50,7 @@ cd ..
 ### CGX from CalculiX
 #---------------------
 echo 'Installing CGX'
-cd CalculiX/cgx_2.14/src
+cd CalculiX/cgx_2.14.1/src
 #make > ../../../cgx_make.txt 2> ../../../cgx_error.txt
 make
 cp cgx $PROGSDIR/bin
