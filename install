@@ -2,7 +2,7 @@
 
 # You will need gcc-fortran, cpio, freeglut, glu
 
-export PROGSDIR=$HOME/CalculiX-2.13
+export PROGSDIR=$HOME/CalculiX-2.14
 export PATH=$PROGSDIR/bin:$PATH
 export LD_LIBRARY_PATH=$PROGSDIR/lib:$LD_LIBRARY_PATH
 export INCLUDE=$PROGSDIR/include:$INCLUDE
@@ -50,23 +50,23 @@ cd ..
 ### CGX from CalculiX
 #---------------------
 echo 'Installing CGX'
-cd CalculiX/cgx_2.13/src
+cd CalculiX/cgx_2.14/src
 #make > ../../../cgx_make.txt 2> ../../../cgx_error.txt
 make
 cp cgx $PROGSDIR/bin
 cd ../../..
-cp cgx_2.13.pdf $PROGSDIR/doc/
-rm cgx_2.13.pdf
+cp cgx_2.14.pdf $PROGSDIR/doc/
+rm cgx_2.14.pdf
 
 
-### CCX 2.13 with pardiso and spooles
+### CCX 2.14 with pardiso and spooles
 #-------------------------------------
-echo 'Installing CCX 2.13'
-cd CalculiX/ccx_2.13/src
+echo 'Installing CCX 2.14'
+cd CalculiX/ccx_2.14/src
 #make > ../../../ccx_make.txt 2> ../../../ccx_error.txt
 make
-cp ccx_2.13 $PROGSDIR/bin
+cp ccx_2.14 $PROGSDIR/bin
 cp LOGBOOK $PROGSDIR/doc
 cd ../../..
-cp ccx_2.13.pdf $PROGSDIR/doc
-rm ccx_2.13.pdf
+cp ccx_2.14.pdf $PROGSDIR/doc
+rm ccx_2.14.pdf

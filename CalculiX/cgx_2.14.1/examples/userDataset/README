@@ -1,0 +1,4 @@
+Purpose:
+Demonstrates how to create and fill a user defined dataset
+
+cgx -b generate.fbl
